@@ -1,0 +1,10 @@
+{
+  "name": "TreeTraversal",
+  "version": "0.0.0",
+  "description": "TreeTraversal",
+  "main": "app.js",
+  "author": {
+    "name": "ajones",
+    "email": ""
+  }
+}
