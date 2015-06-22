@@ -1,4 +1,4 @@
-﻿# RadixSort
+﻿# TreeTraversal
 Implementation of basic tree traversal  iterative and recursive algorithms.
 
 ## Example
