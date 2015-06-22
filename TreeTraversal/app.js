@@ -21,13 +21,18 @@ function peek(stack) {
     return node;
 }
 
+// determines if a variable is undefined
+function isUndefined(variable) {
+    return typeof variable == 'undefined';
+}
+
 // in-order recursive method to visit nodes of a tree
 function inOrder_recursive(tree, index) {
     
-    if (typeof tree[index] == 'undefined') {
+    if (isUndefined(tree[index])) {
         return;
     }
-
+    
     inOrder_recursive(tree, left(index));
     console.log(tree[index]);
     inOrder_recursive(tree, right(index));
@@ -35,11 +40,11 @@ function inOrder_recursive(tree, index) {
 
 // in-order iterative method to visit nodes of a tree
 function inOrder_iterative(tree, index) {
-
+    
     var stack = [];
-
-    while (stack.length > 0 || typeof tree[index] != 'undefined' ) {
-        if (typeof tree[index] != 'undefined') {
+    
+    while (stack.length > 0 || !isUndefined(tree[index])) {
+        if (!isUndefined(tree[index])) {
             stack.push(index);
             index = left(index);
         } else {
@@ -53,7 +58,7 @@ function inOrder_iterative(tree, index) {
 // pre-order recursive method to visit nodes of a tree
 function preOrder_recursive(tree, index) {
     
-    if (typeof tree[index] == 'undefined') {
+    if (isUndefined(tree[index])) {
         return;
     }
     
@@ -66,17 +71,17 @@ function preOrder_recursive(tree, index) {
 function preOrder_iterative(tree, index) {
     
     var stack = [];
-
-    while (stack.length > 0 || typeof tree[index] != 'undefined') {
-        if (typeof tree[index] != 'undefined') {
+    
+    while (stack.length > 0 || !isUndefined(tree[index])) {
+        if (!isUndefined(tree[index])) {
             console.log(tree[index]);
-
+            
             var rightNode = right(index);
-
-            if (typeof tree[rightNode] != 'undefined') {
+            
+            if (!isUndefined(tree[rightNode])) {
                 stack.push(rightNode);
             }
-
+            
             index = left(index);
         } else {
             index = stack.pop();
@@ -87,13 +92,13 @@ function preOrder_iterative(tree, index) {
 // post-order recursive method to visit nodes of a tree
 function postOrder_recursive(tree, index) {
     
-    if (typeof tree[index] == 'undefined') {
+    if (isUndefined(tree[index])) {
         return;
     }
     
     postOrder_recursive(tree, left(index));
     postOrder_recursive(tree, right(index));
-
+    
     console.log(tree[index]);
 }
 
@@ -102,11 +107,11 @@ function postOrder_iterative(tree, index) {
     
     var stack = [];
     var lastNodeVisited = null;
-
+    
     var node = tree[index];
-
-    while (stack.length > 0 || typeof node != 'undefined') {
-        if (typeof node != 'undefined') {
+    
+    while (stack.length > 0 || !isUndefined(node)) {
+        if (!isUndefined(node)) {
             
             stack.push(index);
             index = left(index);
@@ -115,8 +120,8 @@ function postOrder_iterative(tree, index) {
         } else {
             var peekNode = peek(stack);
             var peekNodeRight = right(peekNode);
-
-            if (typeof tree[peekNodeRight] != 'undefined' && lastNodeVisited != peekNodeRight) {
+            
+            if (!isUndefined(tree[peekNodeRight]) && lastNodeVisited != peekNodeRight) {
                 index = peekNodeRight;
                 node = tree[index];
             } else {
